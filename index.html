@@ -109,6 +109,7 @@
                             <button type="submit" id="submit-button">Chci celou zprávu</button>
                         </div>
                         <div id="status-message"></div>
+                        <div id="link-to-report">Zprávu lze prohlédnout <a href="#" target="_blank">zde</a></div>
                     </form>
                 </section>
             </main>
@@ -117,11 +118,28 @@
 
 
     <script>
+
+        const emailKey = 'sentEmail';
+        let alreadySent;
+
+        const button = document.getElementById('submit-button');
+        const statusMessage = document.getElementById('status-message');
+
+        document.addEventListener("DOMContentLoaded", function (event) {
+
+            alreadySent = localStorage.getItem(emailKey);
+            console.log(alreadySent)
+            const link = document.getElementById('link-to-report')
+
+            if (!!alreadySent) {
+                statusMessage.textContent = `Zpráva v minulosti odeslána na ${alreadySent}`;
+                link.style.display = 'block';
+            }
+        });
+
+
         document.getElementById('email-form').addEventListener('submit', function (e) {
             e.preventDefault();
-
-            const button = document.getElementById('submit-button');
-            const statusMessage = document.getElementById('status-message');
             const email = document.getElementById('email').value;
 
             // Disable button and show loading state
@@ -137,8 +155,9 @@
                 pdf_url: "https://github.com/erikvanek/erikvanek.github.io/blob/master/docs/documents/Erik-Vanek-cv.pdf"
             })
                 .then(function () {
-                    statusMessage.textContent = 'Report byl úspěšně odeslán na váš email!';
+                    statusMessage.textContent = 'Zpráva úspěšně odeslána na váš email!';
                     statusMessage.classList.add('success');
+                    localStorage.setItem(emailKey, email)
                 })
                 .catch(function (error) {
                     console.error('EmailJS error:', error);

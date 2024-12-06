@@ -346,6 +346,7 @@ input[type="email"]:focus {
     .teasers {
         grid-template-columns: repeat(3, 1fr);
     }
+
     .teasers .teaser:hover {
         opacity: 1;
         transform: scale(1.02);
@@ -354,10 +355,15 @@ input[type="email"]:focus {
     }
 }
 
-#status-message {
+#status-message,
+#link-to-report {
     margin-top: 16px;
     text-align: center;
     color: #666;
+}
+
+#link-to-report {
+    display: none;
 }
 
 
