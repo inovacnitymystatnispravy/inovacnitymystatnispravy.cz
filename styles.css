@@ -1,5 +1,7 @@
 /* Reset and variables */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -8,7 +10,7 @@
 :root {
     --font-heading: 'Space Grotesk', system-ui, sans-serif;
     --font-body: 'Inter', system-ui, sans-serif;
-    
+
     /* Adjusted colors for more purple prominence */
     --color-primary: #2B1B44;
     --color-secondary: #6B4C8F;
@@ -16,9 +18,9 @@
     --color-background: #F5F3F7;
     --color-text: #1a1a1a;
     --color-text-light: #ffffff;
-    
+
     --gradient-primary: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
-    
+
     --spacing-base: 1rem;
     --max-width: 70rem;
     --content-width: 45rem;
@@ -36,8 +38,12 @@ body {
 .background-wrapper {
     background: var(--color-background);
     min-height: 100vh;
-    clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%);
+    /* clip-path: polygon(0 0, 100% 0, 100% 96%, 0 100%); */
     padding: calc(var(--spacing-base) * 2) 0;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 /* Enhanced typography */
@@ -54,7 +60,7 @@ h2 {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 5vw, 2.5rem);
     font-weight: 700;
-    margin-bottom: calc(var(--spacing-base) * 1.5);
+    margin-bottom: calc(var(--spacing-base) * 2);
     letter-spacing: -0.01em;
 }
 
@@ -91,10 +97,10 @@ header {
 
 .intro {
     max-width: var(--content-width);
-    margin: 0 auto calc(var(--spacing-base) * 6);
+    margin: 0 auto calc(var(--spacing-base) * 2);
 }
 
-.intro p + p {
+.intro p+p {
     margin-top: calc(var(--spacing-base) * 1.5);
 }
 
@@ -136,11 +142,13 @@ header {
 
 .teaser:hover {
     transform: translateY(-5px);
+    transform: scale(1.025);
     box-shadow: 0 8px 30px rgba(43, 27, 68, 0.15);
 }
 
 .teaser:hover::before {
     transform: scaleX(1);
+    transform: scale(1.025);
 }
 
 /* Enhanced form section */
@@ -149,10 +157,11 @@ header {
     padding: calc(var(--spacing-base) * 3);
     background: white;
     border-radius: 16px;
-    box-shadow: 0 8px 32px rgba(43, 27, 68, 0.1);
+    box-shadow: 0 8px 32px rgba(43, 27, 68, 0.3);
     overflow: hidden;
     max-width: var(--content-width);
     margin: 0 auto;
+    margin-bottom: 2rem;
 }
 
 .form-section::before {
@@ -163,14 +172,14 @@ header {
     width: 200%;
     height: 200%;
     background: var(--gradient-primary);
-    opacity: 0.05;
+    opacity: 0.025;
     transform: rotate(-12deg);
     z-index: 0;
 }
 
 .email-form {
     position: relative;
-    z-index: 1;
+    z-index: 5;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-base);
@@ -210,32 +219,43 @@ button {
 }
 
 button:hover {
-    transform: translateY(-2px);
+    /* transform: translateX(-2px); */
+    transform: scale(1.025);
     box-shadow: 0 6px 16px rgba(43, 27, 68, 0.3);
+    cursor: pointer;
 }
 
 button:active {
-    transform: translateY(0);
+    /* transform: translateY(0); */
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
-    .email-form {
+    .email-form div {
         flex-direction: column;
     }
-    
+
     .background-wrapper {
-        clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%);
+        /* clip-path: polygon(0 0, 100% 0, 100% 98%, 0 100%); */
     }
 }
 
 /* Animations */
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.intro, .teaser, .form-section {
+.intro,
+.teaser,
+.form-section {
     animation: fadeIn 0.6s ease-out forwards;
 }
 
@@ -252,8 +272,8 @@ button:active {
 /* Layout with report preview */
 .main-content {
     display: grid;
-    gap: calc(var(--spacing-base) * 4);
-    margin-bottom: calc(var(--spacing-base) * 4);
+    gap: calc(var(--spacing-base) * 2);
+    margin-bottom: 0;
 }
 
 @media (min-width: 968px) {
@@ -264,13 +284,8 @@ button:active {
 }
 
 .report-preview {
-    position: sticky;
     top: calc(var(--spacing-base) * 2);
     transition: transform 0.3s ease;
-}
-
-.report-preview:hover {
-    transform: translateY(-5px);
 }
 
 .report-cover {
@@ -290,7 +305,7 @@ header {
     max-width: var(--content-width);
 }
 
-.intro p + p {
+.intro p+p {
     margin-top: calc(var(--spacing-base) * 1.5);
 }
 
@@ -315,6 +330,7 @@ input[type="email"]:focus {
     outline: none;
     border-color: var(--color-primary);
     box-shadow: 0 4px 12px rgba(43, 27, 68, 0.2);
+    transform: scale(1.025);
 }
 
 /* Teasers grid hover effect */
@@ -330,19 +346,11 @@ input[type="email"]:focus {
     .teasers {
         grid-template-columns: repeat(3, 1fr);
     }
-
-    .teasers:hover {
-        transform: translateY(-5px);
-    }
-
-    .teasers:hover .teaser {
-        opacity: 0.7;
-        transform: scale(0.98);
-    }
-
     .teasers .teaser:hover {
         opacity: 1;
         transform: scale(1.02);
+        transform: scale(1.025);
+
     }
 }
 
