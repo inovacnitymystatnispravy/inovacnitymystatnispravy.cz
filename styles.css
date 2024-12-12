@@ -374,3 +374,25 @@ input[type="email"]:focus {
 .error {
     color: #f44336;
 }
+
+.team {
+    display: flex;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.team a, .team strong {
+    margin-right: 1rem;
+    /* color: #666; */
+    font-weight: 800;
+}
+
+.team a {
+    color: var(--color-secondary);
+}
+
+@media (min-width: 768px) {
+    .team {
+        flex-direction: column;
+    }
+}
