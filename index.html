@@ -73,7 +73,7 @@
     <script>
         (function () {
             // Initialize EmailJS with your public key
-            emailjs.init("qijjXQ-ksm9ubbeXZ");
+            emailjs.init("eZ1pdUQ8dP_aVvG9t");
         })();
     </script>
 </head>
@@ -196,12 +196,12 @@
 
         const button = document.getElementById('submit-button');
         const statusMessage = document.getElementById('status-message');
+        const link = document.getElementById('link-to-report')
 
         document.addEventListener("DOMContentLoaded", function (event) {
 
             alreadySent = localStorage.getItem(emailKey);
             console.log(alreadySent)
-            const link = document.getElementById('link-to-report')
 
             if (!!alreadySent) {
                 statusMessage.textContent = `Zpráva v minulosti odeslána na ${alreadySent}`;
@@ -220,7 +220,7 @@
             button.textContent = 'Odesílám...';
             statusMessage.textContent = '';
 
-            emailjs.send("service_o4nfldx", "template_4h0g4im", {
+            emailjs.send("service_49oko69", "template_dfojpq9", {
                 to_email: email,
                 bcc: 'drymtymdrymtym@gmail.com',
                 // The PDF URL should be the path to your PDF in the GitHub repository
@@ -228,6 +228,7 @@
             })
                 .then(function () {
                     statusMessage.textContent = 'Zpráva úspěšně odeslána na váš email!';
+                    link.style.display = 'block';
                     statusMessage.classList.add('success');
                     localStorage.setItem(emailKey, email)
                 })
